@@ -99,10 +99,10 @@ export default function HomePage() {
             </div>
             
             <div className="flex items-center gap-4">
-              <Link href="/auth/signin">
+              <Link href="api/auth/signin">
                 <Button variant="ghost">Sign In</Button>
               </Link>
-              <Link href="/auth/signin">
+              <Link href="api/auth/signin">
                 <Button>Get Started</Button>
               </Link>
             </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link href="/auth/signin">
+              <Link href="api/auth/signin">
                 <Button size="lg" className="text-lg px-8 py-3">
                   Start Building Now
                   <ArrowRight className="w-5 h-5 ml-2" />

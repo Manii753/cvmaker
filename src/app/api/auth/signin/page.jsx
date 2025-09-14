@@ -65,16 +65,16 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen w-full bg-background flex p-4">
+      <div className="w-full max-w-md ">
         {/* Header */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6 text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4" />
+        <div className="flex flex-col gap-[20px] px  text-center mb-8">
+          <Link href="/" className="inline-flex gap-2 m-6 text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="w-5 h-5" />
             Back to Home
           </Link>
           
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 ">
             <FileText className="w-8 h-8 text-primary" />
             <span className="text-2xl font-bold">CV Builder</span>
           </div>
@@ -86,10 +86,10 @@ export default function SignInPage() {
         </div>
 
         {/* Sign In Card */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Sign In</CardTitle>
-            <CardDescription>
+        <Card className='w-fit items-center m-auto p-[30px] flex flex-col gap-[15px] '>
+          <CardHeader className="w-full gap-[5px]">
+            <CardTitle >Sign In</CardTitle>
+            <CardDescription >
               Choose your preferred sign-in method to get started
             </CardDescription>
           </CardHeader>
@@ -105,7 +105,7 @@ export default function SignInPage() {
             {/* Google Sign In */}
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full my-[5px] p-[5px]"
               onClick={() => handleSignIn('google')}
               disabled={isLoading}
             >
@@ -120,7 +120,7 @@ export default function SignInPage() {
             {/* GitHub Sign In */}
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full my-[5px] p-[5px]"
               onClick={() => handleSignIn('github')}
               disabled={isLoading}
             >
