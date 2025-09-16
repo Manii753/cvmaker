@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { debounce } from '@/lib/utils';
+import debounce from "lodash/debounce";
+
 
 const defaultResumeData = {
   meta: {

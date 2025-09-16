@@ -1,3 +1,6 @@
+//api/auth/signin/page.jsx
+
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -34,6 +37,7 @@ export default function SignInPage() {
     // Check if user is already signed in
     getSession().then((session) => {
       if (session) {
+        console.log('User is already signed in');
         router.push('/dashboard');
       }
     });
