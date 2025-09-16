@@ -5,11 +5,13 @@ import dbConnect from '@/lib/dbConnect';
 import Resume from '@/lib/models/Resume';
 
 // GET /api/resumes/[id] - Get a specific resume
-export async function GET(request, context) {
+export async function GET(request, { params }) {
   try {
-    const { params } = await context; // ✅ await params
-    const session = await getServerSession(authOptions);
+    // Await params before using its properties
+    const { id } = await params;
     
+    const session = await getServerSession(authOptions);
+
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -17,15 +19,12 @@ export async function GET(request, context) {
     await dbConnect();
 
     const resume = await Resume.findOne({
-      _id: params.id,
+      _id: id, // Use the destructured id
       userId: session.user.id,
     });
 
     if (!resume) {
-      return NextResponse.json(
-        { error: 'Resume not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
     }
 
     return NextResponse.json(resume);
@@ -39,30 +38,29 @@ export async function GET(request, context) {
 }
 
 // PUT /api/resumes/[id] - Update a specific resume
-export async function PUT(request, context) {
+export async function PUT(request, { params }) {
   try {
-    const { params } = await context; // ✅ await params
-    const session = await getServerSession(authOptions);
+    // Await params before using its properties
+    const { id } = await params;
     
+    const session = await getServerSession(authOptions);
+
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
-    
+
     await dbConnect();
 
     const resume = await Resume.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: id, userId: session.user.id }, // Use the destructured id
       { ...body },
       { new: true, runValidators: true }
     );
 
     if (!resume) {
-      return NextResponse.json(
-        { error: 'Resume not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
     }
 
     return NextResponse.json(resume);
@@ -76,11 +74,13 @@ export async function PUT(request, context) {
 }
 
 // DELETE /api/resumes/[id] - Delete a specific resume
-export async function DELETE(request, context) {
+export async function DELETE(request, { params }) {
   try {
-    const { params } = await context; // ✅ await params
-    const session = await getServerSession(authOptions);
+    // Await params before using its properties
+    const { id } = await params;
     
+    const session = await getServerSession(authOptions);
+
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -88,15 +88,12 @@ export async function DELETE(request, context) {
     await dbConnect();
 
     const resume = await Resume.findOneAndDelete({
-      _id: params.id,
+      _id: id, // Use the destructured id
       userId: session.user.id,
     });
 
     if (!resume) {
-      return NextResponse.json(
-        { error: 'Resume not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
     }
 
     return NextResponse.json({ message: 'Resume deleted successfully' });

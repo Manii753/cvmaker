@@ -89,7 +89,7 @@ export default function ModernTemplate({ data, className = '' }) {
             <h3 className="text-lg font-semibold text-slate-900 border-b-2 border-slate-900 pb-1 mb-4">
               Professional Summary
             </h3>
-            <p className="text-slate-700 leading-relaxed">{summary}</p>
+            <p className="text-slate-700 leading-relaxed wrap-anywhere ">{summary}</p>
           </section>
         )}
 
