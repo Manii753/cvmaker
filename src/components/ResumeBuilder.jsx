@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect , useState } from 'react';
 import useResumeStore from '@/lib/store/resumeStore';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -80,7 +80,7 @@ export default function ResumeBuilder() {
     resumeData 
   } = useResumeStore();
 
-  const [showPreview, setShowPreview] = React.useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   // Auto-save functionality
   useEffect(() => {
@@ -231,29 +231,6 @@ export default function ResumeBuilder() {
                 {getCurrentStepComponent()}
               </div>
 
-              {/* Navigation Buttons */}
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex justify-between">
-                    <Button
-                      variant="outline"
-                      onClick={handlePrevStep}
-                      disabled={currentStep === 0}
-                    >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      Previous
-                    </Button>
-                    
-                    <Button
-                      onClick={handleNextStep}
-                      disabled={currentStep === steps.length - 1}
-                    >
-                      Next
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
 

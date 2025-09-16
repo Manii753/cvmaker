@@ -5,11 +5,12 @@ import dbConnect from '@/lib/dbConnect';
 import Resume from '@/lib/models/Resume';
 
 // GET /api/resumes/[id] - Get a specific resume
-export async function GET(request, { params }) {
+export async function GET(request, context) {
   try {
+    const { params } = await context; // ✅ await params
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -38,11 +39,12 @@ export async function GET(request, { params }) {
 }
 
 // PUT /api/resumes/[id] - Update a specific resume
-export async function PUT(request, { params }) {
+export async function PUT(request, context) {
   try {
+    const { params } = await context; // ✅ await params
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -51,10 +53,7 @@ export async function PUT(request, { params }) {
     await dbConnect();
 
     const resume = await Resume.findOneAndUpdate(
-      {
-        _id: params.id,
-        userId: session.user.id,
-      },
+      { _id: params.id, userId: session.user.id },
       { ...body },
       { new: true, runValidators: true }
     );
@@ -77,11 +76,12 @@ export async function PUT(request, { params }) {
 }
 
 // DELETE /api/resumes/[id] - Delete a specific resume
-export async function DELETE(request, { params }) {
+export async function DELETE(request, context) {
   try {
+    const { params } = await context; // ✅ await params
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
